@@ -11,6 +11,7 @@ public class PizzeriaAdminConsoleApp {
 		Scanner sc = new Scanner(System.in);
 		
 		boolean next = true;
+		int option = 0;
 		
 		Pizza [] pizzas = {
 				new Pizza("PEP","Péperoni",12.50),
@@ -31,11 +32,11 @@ public class PizzeriaAdminConsoleApp {
 
 
 
-int choix = sc.nextInt();
+ 	option = sc.nextInt();
 
-switch (choix) {
+ 	switch (option) {
 
-case 1:
+ 	case 1:
 		System.out.println(" Liste des pizzas");
 		
 		for (Pizza pizza : pizzas) {
@@ -94,14 +95,14 @@ case 3:
 	String codePizza = sc.nextLine();
 	
 	// instanciation d'une nouvelle pizza pour la modifier
-	Pizza pizzaToModif = new Pizza();
+	Pizza editPizza = new Pizza();
 	
 	System.out.println(codePizza);
 	// recuperation de la pizza a modifier dans le tableau
 	for (Pizza pizza : pizzas) {
 		System.out.println(pizza.getCode());
 		if(pizza.getCode().equals(codePizza)) {
-			pizzaToModif = pizza;
+			editPizza = pizza;
 			
 	
 		
@@ -117,13 +118,13 @@ case 3:
 			
 			
 			// modification de la pizza
-			pizzaToModif.setCode(newCode);
-			pizzaToModif.setDesignation(newNom);
-			pizzaToModif.setPrix(newPrix);
+			editPizza.setCode(newCode);
+			editPizza.setDesignation(newNom);
+			editPizza.setPrix(newPrix);
 			
 			
 			//rajout au tableau
-			pizzas[pizzaToModif.getId()] = pizzaToModif;
+			pizzas[editPizza.getId()] = editPizza;
 			
 		}
 		
