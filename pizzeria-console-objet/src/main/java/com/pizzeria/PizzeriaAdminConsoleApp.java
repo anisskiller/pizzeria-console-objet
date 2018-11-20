@@ -50,5 +50,19 @@ public class PizzeriaAdminConsoleApp {
 			}
 			
 		}
+		
+		
+		Pizza pep = new Pizza("PEP", "Pépéroni", 12.50);
+		Pizza mar = new Pizza("MAR", "Margherita", 14.00);
+		Pizza rein = new Pizza("REIN", "La Reine", 11.50);	
+		Pizza fro = new Pizza("FRO", "La 4 fromages", 12.00);
+		Pizza can = new Pizza("CAN", "La cannibale", 12.50);
+		Pizza sav = new Pizza("SAV", "La savoyarde", 14.00);
+		Pizza ori = new Pizza("ORI","L'orientale", 13.50);
+		Pizza ind = new Pizza("IND", "L'indienne", 14.00);
+		String code;
+		String name;
+		double prix;
+		Pizza[] pizzas = {pep, mar, rein, fro, can, sav, ori, ind};
 	}
 }
