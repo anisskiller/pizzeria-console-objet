@@ -8,29 +8,27 @@ public class Pizza {
 	/** 
 	 * 
 	 */
-	private int id;
-	private String code;
-	private String désignation;
-	private double prix;
+	public int id;
+	public String code;
+	public String designation;
+	public double prix;
 	
 	private static  int compteur = 0;
 	
 	/**
-	 * 
-	 * @param code : designe le CODE de la pizza
-	 * @param désignation : Designe le nom utilitaire de la pizza
-	 * @param prix : Prix en euros de la pizza
-	 * @param id : Identifiant unique qui ajoute un au compteur static
+	 * @param id : identifiant de la pizza
+	 * @param code : code de la pizza
+	 * @param designation : nom de la pizza
+	 * @param prix : Prix de la pizza
 	 */
-	public Pizza(String code, String désignation, double prix) {
-		this.id = compteur++;
-		this.code = code;
-		this.désignation = désignation;
-		this.prix = prix;			
-	}
+
 	
+	public String toString() {
+		return code + " -> " + designation + "("+ prix + "€)";
+	}
+
 	public Pizza() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
@@ -63,17 +61,17 @@ public class Pizza {
 	}
 	/**
 	 * 
-	 * @return la désignation de la pizza
+	 * @return nom de la pizza
 	 */
-	public String getDésignation() {
-		return désignation;
+	public String getDesignation() {
+		return designation;
 	}
 	/**
 	 * 
-	 * @param désignation de la pizza
+	 * @param nom de la pizza
 	 */
-	public void setDésignation(String désignation) {
-		this.désignation = désignation;
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 	/**
 	 * 
@@ -83,16 +81,19 @@ public class Pizza {
 		return prix;
 	}
 	/**
-	 * 
+	 *
 	 * @param prix de la pizza en float
 	 */
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 
-	@Override
-	public String toString() {
-		return code + " -> " + désignation + "("+ prix + "€)";
+
+	public Pizza(String code, String designation, double prix) {
+		this.id = compteur++;
+		this.code = code;
+		this.designation = designation;
+		this.prix = prix;			
 	}
 	
 }
