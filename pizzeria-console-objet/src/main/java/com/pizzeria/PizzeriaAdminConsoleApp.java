@@ -8,6 +8,11 @@ public class PizzeriaAdminConsoleApp {
 	
 	public static void main(String[] args) {
 		
+		Scanner sc = new Scanner(System.in);
+		
+		boolean next = true;
+		int option = 0;
+		
 		Pizza [] pizzas = {
 				new Pizza("PEP","Péperoni",12.50),
 				new Pizza("MAR","Margherita",14.00),
@@ -16,35 +21,28 @@ public class PizzeriaAdminConsoleApp {
 				new Pizza("CAN","La cannibale",12.50),
 				new Pizza("SAV","La savoyarde",13.00),
 				new Pizza("ORI","L'orientale",13.50),
-				new Pizza("IND","L'indienne",14.00),
-};
-
-boolean continuer = true;
-
-while(continuer == true) {
-System.out.println(	"***** Pizzeria Administration *****");
-System.out.println("1. Lister les pizzas");
-System.out.println("2. Ajouter une nouvelle pizza");
-System.out.println("3. Mettre à jour une pizza");
-System.out.println("4. Supprimer une pizza");
-System.out.println("99. Sortir ");
+				new Pizza("IND","L'indienne",14.00)
+		};
 
 
-Scanner sc = new Scanner(System.in);
 
-int choix = sc.nextInt();
+		while(next == true) {
+			System.out.println("***** Pizzeria Administration *****" + "\n1.	  Lister les pizzas" + "\n2.	  Ajouter une nouvelle pizza" + "\n3.	  Mettre à jour une pizza" + "\n4.	  Supprimer une pizza" + "\n99.	  Sortir");
 
-switch (choix) {
 
-case 1:
+
+ 	option = sc.nextInt();
+
+ 	// switch (option) {
+
+ 	if(option == 1) {
 		System.out.println(" Liste des pizzas");
 		
 		for (Pizza pizza : pizzas) {
 			System.out.println(pizza.toString());			
 		}
-		break;
-	
-case 2:
+		// break;
+ 	} else if(option == 2) {
 	
 	System.out.println(" Ajout d'une nouvelle pizza");
 	// remise a 0 du scanner
@@ -59,25 +57,24 @@ case 2:
 	System.out.println(" Veuillez saisir le prix :");	
 	double prix = sc.nextDouble();
 	
-	// creation du tableau temporaire de pizza et attribution des valeurs de l'ancien tableau
-	Pizza [] pizzasTemp = new Pizza[pizzas.length+1];			
-	System.out.println(pizzasTemp.length);
+	// déclaration d'un tableau provisoire de pizza et attribution des valeurs de l'ancien tableau
+	Pizza [] pizzasProvisoire = new Pizza[pizzas.length+1];			
+	System.out.println(pizzasProvisoire.length);
 	for(int i = 0; i<pizzas.length; i++) {
-		pizzasTemp[i] = pizzas[i];
+		pizzasProvisoire[i] = pizzas[i];
 		
 	}
 	
 	// changment de la taille de l'ancien tableau et recuperation des anciennes valeurs
-	pizzas = pizzasTemp;
+	pizzas = pizzasProvisoire;
 	
 	
 	// rajout a la fin du tableau de la nouvelle pizza
 	Pizza pizzaToAdd = new Pizza(code, nom, prix);
 	pizzas[pizzas.length-1] = pizzaToAdd;
 	
-	break;
-	
-case 3:
+			// break;
+ 	} else if(option ==3) {
 	
 	
 	System.out.println(" Mise à jour d'une pizza");
@@ -91,85 +88,85 @@ case 3:
 		System.out.println(pizza.toString());		
 	}
 	
-	System.out.println("Veuillez choisir le code de la pizza à modifier");
+	System.out.println("code de la pizza que tu veux modifier : ");
 	String codePizza = sc.nextLine();
 	
 	// instanciation d'une nouvelle pizza pour la modifier
-	Pizza pizzaToModif = new Pizza();
+	Pizza editPizza = new Pizza();
 	
 	System.out.println(codePizza);
 	// recuperation de la pizza a modifier dans le tableau
 	for (Pizza pizza : pizzas) {
 		System.out.println(pizza.getCode());
 		if(pizza.getCode().equals(codePizza)) {
-			pizzaToModif = pizza;
+			editPizza = pizza;
 			
 	
 		
 			// saisie des valeurs
 			System.out.println(" Veuillez saisir le nouveau code :");
-			String newCode = sc.nextLine();
+			String editCode = sc.nextLine();
 			
 			System.out.println(" Veuillez saisir le nouveau nom (sans espace) :");
-			String newNom = sc.nextLine();
+			String editNom = sc.nextLine();
 			
 			System.out.println(" Veuillez saisir le nouveau prix :");
-			Double newPrix = sc.nextDouble();
+			Double editPrix = sc.nextDouble();
 			
 			
 			// modification de la pizza
-			pizzaToModif.setCode(newCode);
-			pizzaToModif.setDésignation(newNom);
-			pizzaToModif.setPrix(newPrix);
+			editPizza.setCode(editCode);
+			editPizza.setDesignation(editNom);
+			editPizza.setPrix(editPrix);
 			
 			
 			//rajout au tableau
-			pizzas[pizzaToModif.getId()] = pizzaToModif;
+			pizzas[editPizza.getId()] = editPizza;
 			
 		}
 		
 	}
-	break;
+	//break;
 	
-case 4:		
+ 	} else if(option == 4) {		
 	
 	
-	System.out.println(" Suppression d'une pizza");
-	System.out.println("Veuillez choisir le code de la pizza à supprimer");
+	System.out.println(" Supprimer une pizza" + "\ncode de la pizza : ");
 	//remise a 0 
 	sc.nextLine();
 	
-	String codePizzaAsupprimer = sc.nextLine();
+	String codeToDelete = sc.nextLine();
 		
 	
 	// creation d'un tableau temporaire plus petit que l'ancien
-		Pizza [] pizzasTemp2 = new Pizza[pizzas.length-1];
+		Pizza [] pizzasProvisoire2 = new Pizza[pizzas.length-1];
 		
 		
 	// utilisation d'une variable i pour lajout des pizza a garder dans le tableau
 		int i = 0;
-		for (Pizza pizzaDelete : pizzas) {
+		for (Pizza deletePizza : pizzas) {
 			// si le code de la pizza n'est pas celui a supprimer on le rajoute au tableau
-			if(!pizzaDelete.getCode().equals(codePizzaAsupprimer)) {
-			pizzasTemp2[i] = pizzaDelete;
+			if(!deletePizza.getCode().equals(codeToDelete)) {
+			pizzasProvisoire2[i] = deletePizza;
 			i++;
 			}
 		}
 		
 		// modification de la taille de l'ancien tableau et copie des données
-		pizzas = new Pizza[pizzasTemp2.length];
-		pizzas = pizzasTemp2;
-		
-		break;
-case 99:
-	System.out.println(" Au revoir");
-	continuer = false;
-	break;
+		pizzas = new Pizza[pizzasProvisoire2.length];
+		pizzas = pizzasProvisoire2;
 
-default:
-	break;
-}
+ 	} else if(option == 99) {
+	System.out.println("Get out of here ! ");
+	next = false;
 
-}
+ 	} else if ((option < 1 && option > 4) ||(option != 99)) {
+ 		System.out.println("Entre une option entre 1 et 4... Ou sors d'ici en tapant 99 :D");
+ 	}
+		}
 	}
+
+
+
+	
 }
