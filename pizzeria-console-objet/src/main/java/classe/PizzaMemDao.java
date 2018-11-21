@@ -19,7 +19,7 @@ public abstract class PizzaMemDao implements IPizzaDao {
 
 	public Pizza[] listPizzas() {
 		return somePizzas;
-	} 
+	}  
 
 	public Pizza listCode(String code) {
 		Pizza pizzou = null;
