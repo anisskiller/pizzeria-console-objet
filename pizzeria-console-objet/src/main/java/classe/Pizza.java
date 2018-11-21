@@ -13,7 +13,11 @@ public class Pizza {
 	 * @param id : identifiant de la pizza
 	 * @param code : code de la pizza
 	 * @param designation : nom de la pizza
+<<<<<<< HEAD
 	 * @param prix : Prix de la pizza 
+=======
+	 * @param prix : Prix de la pizza
+>>>>>>> branch 'master' of https://github.com/anisskiller/pizzeria-console-objet.git
 	 */
 
 	

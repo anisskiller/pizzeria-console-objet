@@ -10,9 +10,14 @@ public class PizzeriaAdminConsoleApp {
 		 
 		Scanner sc = new Scanner(System.in); 
 		
+<<<<<<< HEAD
 		boolean next = true;
 		int option = 0;
+=======
+		Scanner sc = new Scanner(System.in);
+>>>>>>> branch 'master' of https://github.com/anisskiller/pizzeria-console-objet.git
 		
+<<<<<<< HEAD
 		Pizza[] pizzas = {
 				new Pizza("PEP","Péperoni",12.50),
 				new Pizza("MAR","Margherita",14.00),
@@ -24,8 +29,28 @@ public class PizzeriaAdminConsoleApp {
 				new Pizza("IND","L'indienne",14.00)
 		};
 
+=======
+		boolean next = true;
+		int option = 0;
+		
+		Pizza [] pizzas = {
+				new Pizza("PEP","Péperoni",12.50),
+				new Pizza("MAR","Margherita",14.00),
+				new Pizza("REIN","La Reine",11.50),
+				new Pizza("FRO","La 4 fromages",12.00),
+				new Pizza("CAN","La cannibale",12.50),
+				new Pizza("SAV","La savoyarde",13.00),
+				new Pizza("ORI","L'orientale",13.50),
+				new Pizza("IND","L'indienne",14.00)
+		};
+>>>>>>> branch 'master' of https://github.com/anisskiller/pizzeria-console-objet.git
 
+<<<<<<< HEAD
  
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/anisskiller/pizzeria-console-objet.git
 		while(next == true) {
 			System.out.println("***** Pizzeria Administration *****" + "\n1.	  Lister les pizzas" + "\n2.	  Ajouter une nouvelle pizza" + "\n3.	  Mettre à jour une pizza" + "\n4.	  Supprimer une pizza" + "\n99.	  Sortir");
 
