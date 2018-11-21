@@ -9,3 +9,4 @@ public interface IPizzaDao {
 	void deletePizza(String codePizza); 
 	
 }
+ 
