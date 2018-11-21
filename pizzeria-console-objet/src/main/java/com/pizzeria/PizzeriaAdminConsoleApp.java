@@ -7,8 +7,8 @@ import classe.Pizza;
 public class PizzeriaAdminConsoleApp {
 	
 	public static void main(String[] args) {
-		
-		Scanner sc = new Scanner(System.in);
+		 
+		Scanner sc = new Scanner(System.in); 
 		
 		boolean next = true;
 		int option = 0;
@@ -25,7 +25,7 @@ public class PizzeriaAdminConsoleApp {
 		};
 
 
-
+ 
 		while(next == true) {
 			System.out.println("***** Pizzeria Administration *****" + "\n1.	  Lister les pizzas" + "\n2.	  Ajouter une nouvelle pizza" + "\n3.	  Mettre à jour une pizza" + "\n4.	  Supprimer une pizza" + "\n99.	  Sortir");
 

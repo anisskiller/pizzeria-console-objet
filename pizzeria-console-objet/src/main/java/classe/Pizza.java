@@ -13,7 +13,7 @@ public class Pizza {
 	 * @param id : identifiant de la pizza
 	 * @param code : code de la pizza
 	 * @param designation : nom de la pizza
-	 * @param prix : Prix de la pizza
+	 * @param prix : Prix de la pizza 
 	 */
 
 	
