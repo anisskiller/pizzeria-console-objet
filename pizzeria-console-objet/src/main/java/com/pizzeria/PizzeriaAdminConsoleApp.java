@@ -1,15 +1,19 @@
 package com.pizzeria;
-
+import classe.PizzaMemDao;
 import java.util.Scanner;
+import java.util.Collections;
+import exception.StockageException; 
+
+
 
 
 import classe.Pizza;
-import classe.PizzaMemDao;
+
 
 public class PizzeriaAdminConsoleApp {
 	
 	public static void main(String[] args) {
-		// PizzaMemDao pizzas = new PizzaMemDao();
+		// PizzaMemDao pizza = new PizzaMemDao();
 		
 		// Pizza [] pizzas = dao.findAllPizzas(); 
 		Scanner sc = new Scanner(System.in); 
