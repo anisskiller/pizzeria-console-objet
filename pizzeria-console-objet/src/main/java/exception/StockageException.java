@@ -18,7 +18,7 @@ public class StockageException extends RuntimeException {
 	public void PizzaException(String arg0, Throwable arg1, boolean arg2, boolean arg3) {
 	
 		// TODO Auto-generated constructor stub
-	}
+	} 
 
 	public void PizzaException(String arg0, Throwable arg1) {
 		

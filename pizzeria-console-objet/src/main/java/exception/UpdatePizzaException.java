@@ -1,5 +1,5 @@
 package exception;
-
+ 
 public class UpdatePizzaException extends StockageException {
 
 	/**
