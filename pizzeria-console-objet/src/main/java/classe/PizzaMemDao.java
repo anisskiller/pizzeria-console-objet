@@ -17,7 +17,7 @@ public abstract class PizzaMemDao implements IPizzaDao {
 
 	Pizza[] somePizzas = { pep, mar, rein, fro, can, ori, ind };
 
-	public Pizza[] listPizzas() {
+	public Pizza[] findAllPizzas() {
 		return somePizzas;
 	}  
 
@@ -33,7 +33,7 @@ public abstract class PizzaMemDao implements IPizzaDao {
 	
 	// On vérifie l'existence d'une pizza à l'aide d'un booléen qui détermine sa présence
 	// suite au parcours du tableau en utilisant le code de la Pizza en tant que parcoureur
-	public boolean pizzaOuPasPizza(String code) {
+	public boolean isPizzaExists(String code) {
 		boolean pizzaPresente = false;
 		for (Pizza pizzou : somePizzas) {
 			if(pizzou.getCode().equals(code)) {
@@ -45,7 +45,7 @@ public abstract class PizzaMemDao implements IPizzaDao {
 
 
 
-	public void modifierPizza(String code, Pizza pizza) {
+	public void updatePizza(String code, Pizza pizza) {
 		for (Pizza editPizza : somePizzas) {
 			if (editPizza.getCode().equals(code)) {
 				editPizza = pizza;
@@ -54,7 +54,7 @@ public abstract class PizzaMemDao implements IPizzaDao {
 		}
 	}
 
-	public void ajouterPizza(Pizza pizza) {
+	public void addPizza(Pizza pizza) {
 		Pizza[] nouvellePizza = new Pizza[somePizzas.length + 1];
 
 		for (int i = 0; i < somePizzas.length; i++) {
@@ -64,7 +64,20 @@ public abstract class PizzaMemDao implements IPizzaDao {
 		somePizzas = nouvellePizza;
 	}
 
-	public void supprimerPizza(String code) {
+	
+	public void listPizza() {
+		
+		System.out.println(" Liste des pizzas");
+		for (Pizza pizza : somePizzas) {
+			System.out.println(pizza.toString());			
+		}	
+	}
+	
+
+	
+
+	
+	public void deletePizza(String code) {
 		Pizza[] nouvellePizza = new Pizza[somePizzas.length - 1];
 		int i = 0;
 		for (Pizza pizzou : somePizzas) {
@@ -74,11 +87,14 @@ public abstract class PizzaMemDao implements IPizzaDao {
 				i++;
 			}
 		}
+		
+		somePizzas = new Pizza[nouvellePizza.length];
 		somePizzas = nouvellePizza;
+		
+		
+		System.out.println("Pizza supprimée");
+		
 	}
-
-
-	
 	
 
 }
