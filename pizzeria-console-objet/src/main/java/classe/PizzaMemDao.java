@@ -1,5 +1,8 @@
 package classe;
 
+import exception.DeletePizzaException;
+import exception.SavePizzaException;
+import exception.UpdatePizzaException;
 
 public abstract class PizzaMemDao implements IPizzaDao {
 	
@@ -45,7 +48,7 @@ public abstract class PizzaMemDao implements IPizzaDao {
 
 
 
-	public void updatePizza(String code, Pizza pizza) {
+	public void updatePizza(String code, Pizza pizza) throws UpdatePizzaException {
 		for (Pizza editPizza : somePizzas) {
 			if (editPizza.getCode().equals(code)) {
 				editPizza = pizza;
@@ -54,7 +57,7 @@ public abstract class PizzaMemDao implements IPizzaDao {
 		}
 	}
 
-	public void addPizza(Pizza pizza) {
+	public void addPizza(Pizza pizza) throws SavePizzaException {
 		Pizza[] nouvellePizza = new Pizza[somePizzas.length + 1];
 
 		for (int i = 0; i < somePizzas.length; i++) {
@@ -77,7 +80,7 @@ public abstract class PizzaMemDao implements IPizzaDao {
 	
 
 	
-	public void deletePizza(String code) {
+	public void deletePizza(String code) throws DeletePizzaException {
 		Pizza[] nouvellePizza = new Pizza[somePizzas.length - 1];
 		int i = 0;
 		for (Pizza pizzou : somePizzas) {
