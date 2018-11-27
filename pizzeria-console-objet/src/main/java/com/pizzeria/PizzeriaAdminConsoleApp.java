@@ -43,7 +43,7 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("***** Pizzeria Administration *****" + 
 		"\n1.	  Lister les pizzas" + "\n2.	  Ajouter une nouvelle pizza" + 
 		"\n3.	  Mettre à jour une pizza" + "\n4.	  Supprimer une pizza" + 
-		"\n5. Trier les pizza par prix decroissant" + "\n6. Trier les pizza par prix Croissant"
+		"\n5. 	  Trier par prix décroissant" +  "\n6.     Trier par code croissant"
 		+ "\n99.	  Sortir");
 
 
