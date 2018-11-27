@@ -1,18 +1,25 @@
 package com.pizzeria;
 import classe.PizzaMemDao;
+
 import java.util.Scanner;
+
+import com.pizzeria.model.CategoriePizzaEnum;
+
 import java.util.Collections;
-import exception.StockageException; 
+import java.util.List;
 
-
-
-
+import exception.DeletePizzaException;
+import exception.SavePizzaException;
+import exception.StockageException;
+import exception.UpdatePizzaException;
+import classe.DecreasingPrice;
+import classe.IncreasingCode;
 import classe.Pizza;
 
 
 public class PizzeriaAdminConsoleApp {
 	
-	public static void main(String[] args) {
+	public static <T> void main(String[] args) {
 		// PizzaMemDao pizza = new PizzaMemDao();
 		
 		// Pizza [] pizzas = dao.findAllPizzas(); 
@@ -21,25 +28,23 @@ public class PizzeriaAdminConsoleApp {
 		boolean next = true;
 		int option = 0;
 
+		PizzaMemDao outilAccessData = new PizzaMemDao();
 		
+		List<Pizza> pizzas = outilAccessData.findAllPizzas();
 
-		Pizza[] pizzas = {
-				new Pizza("PEP","Péperoni",12.50),
-				new Pizza("MAR","Margherita",14.00),
-				new Pizza("REIN","La Reine",11.50),
-				new Pizza("FRO","La 4 fromages",12.00),
-				new Pizza("CAN","La cannibale",12.50),
-				new Pizza("SAV","La savoyarde",13.00),
-				new Pizza("ORI","L'orientale",13.50),
-				new Pizza("IND","L'indienne",14.00)
-		};
+		
 		
 		
 
 
 
 		while(next == true) {
-			System.out.println("***** Pizzeria Administration *****" + "\n1.	  Lister les pizzas" + "\n2.	  Ajouter une nouvelle pizza" + "\n3.	  Mettre à jour une pizza" + "\n4.	  Supprimer une pizza" + "\n99.	  Sortir");
+			
+			System.out.println("***** Pizzeria Administration *****" + 
+		"\n1.	  Lister les pizzas" + "\n2.	  Ajouter une nouvelle pizza" + 
+		"\n3.	  Mettre à jour une pizza" + "\n4.	  Supprimer une pizza" + 
+		"\n5. Trier les pizza par prix decroissant" + "\n6. Trier les pizza par prix Croissant"
+		+ "\n99.	  Sortir");
 
 
 
@@ -48,10 +53,10 @@ public class PizzeriaAdminConsoleApp {
 		if(option == 1) {
 			
 			System.out.println(" Liste des pizzas");
+			
+			outilAccessData.listPizza();
 		
-			for (Pizza pizza : pizzas) {
-				System.out.println(pizza.toString());			
-			}
+			
 
 		} else if(option == 2) {
 	
@@ -67,104 +72,110 @@ public class PizzeriaAdminConsoleApp {
 				
 			System.out.println(" le prix :");	
 			double prix = sc.nextDouble();
-	
-			// déclaration d'un tableau provisoire de pizza et attribution des valeurs de l'ancien tableau
-			Pizza [] pizzasProvisoire = new Pizza[pizzas.length+1];			
-			System.out.println(pizzasProvisoire.length);
 			
-			for(int i = 0; i<pizzas.length; i++) {
-		
-				pizzasProvisoire[i] = pizzas[i];
-		
+			System.out.println("categorie");
+			sc.nextLine();
+			
+			try {
+				// verification du type de pizza et presence du type
+				CategoriePizzaEnum categorie = CategoriePizzaEnum.valueOf(sc.nextLine().toUpperCase());
+				Pizza pizzaToAdd = new Pizza(code, nom, prix, categorie);
+				outilAccessData.addPizza(pizzaToAdd);
+			} catch (SavePizzaException SauvegarderPizzaExceptionCestPasBien) {
+			
+			System.err.println(SauvegarderPizzaExceptionCestPasBien.getMessage());
+				
+			// si le type de pizza existe pas on le met dans autre
+			} catch (IllegalArgumentException IllegalCestPasBien) {
+				System.out.println("La catégorie n'y est pas ");
+				Pizza addPizza = new Pizza(code, nom, prix, CategoriePizzaEnum.AUTRE);
+				try {
+					outilAccessData.addPizza(addPizza);
+				} catch (SavePizzaException SauvegarderPizzaExceptionCestPasBien) {
+					System.err.println(SauvegarderPizzaExceptionCestPasBien.getMessage());
+				
+				}
 			}
 	
-			// changment de la taille de l'ancien tableau et recuperation des anciennes valeurs
-			pizzas = pizzasProvisoire;
-	
-	
-			// rajout a la fin du tableau de la nouvelle pizza
-			Pizza pizzaToAdd = new Pizza(code, nom, prix);
-			pizzas[pizzas.length-1] = pizzaToAdd;
+
 	
 			} else if(option ==3) {
 	
 				System.out.println(" Mise à jour d'une pizza");
-	
+				
 				// remise a 0 du scanner
 				sc.nextLine();
-	
-				// affichage des pizza
-				System.out.println(" Liste des pizzas");
-	
-				for (Pizza pizza : pizzas) {
-					System.out.println(pizza.toString());		
-				}
-	
-				System.out.println("code de la pizza que tu veux modifier : ");
+				
+				// Lister les pizza
+				outilAccessData.listPizza();
+				
+				System.out.println("Veuillez choisir le code de la pizza à modifier");
 				String codePizza = sc.nextLine();
-	
+				
+				// Saisie des nouveaux paramètres
+				System.out.println(" Nouveau code :");
+				String nouveauCode = sc.nextLine();
+				System.out.println(" Nouveau nom :");
+				String nouveauNom = sc.nextLine();			
+				System.out.println(" Nouveau pirx :");
+				Double nouveauPrix = sc.nextDouble();
+				sc.nextLine();
+				System.out.println(" Catégorie :");	
+				CategoriePizzaEnum categorie;
+				
+				try {
+					// verification du type de pizza et presence du type
+					 categorie = CategoriePizzaEnum.valueOf(sc.nextLine().toUpperCase());
+				}catch (IllegalArgumentException et) {
+					System.err.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
+					 categorie = CategoriePizzaEnum.AUTRE;
+				}
 				// instanciation d'une nouvelle pizza pour la modifier
 				Pizza editPizza = new Pizza();
-	
-				System.out.println(codePizza);
 				
-				// récuperation de la pizza a modifier dans le tableau
-				for (Pizza pizza : pizzas) {
-					
-					System.out.println(pizza.getCode());
-					
-					if(pizza.getCode().equals(codePizza)) {
-						
-						editPizza = pizza;
-		
-						// saisie des valeurs
-						System.out.println(" Veuillez saisir le nouveau code :");
-						String editCode = sc.nextLine();
-			
-						System.out.println(" Veuillez saisir le nouveau nom (sans espace) :");
-						String editNom = sc.nextLine();
-			
-						System.out.println(" Veuillez saisir le nouveau prix :");
-						Double editPrix = sc.nextDouble();
+				// modification de la pizza
+				editPizza.setCode(nouveauCode);
+				editPizza.setDesignation(nouveauNom);
+				editPizza.setPrix(nouveauPrix);
+				editPizza.setCategoriePizza(categorie);
 				
-						// modification de la pizza
-						editPizza.setCode(editCode);
-						editPizza.setDesignation(editNom);
-						editPizza.setPrix(editPrix);
-			
-						//rajout au tableau
-						pizzas[editPizza.getId()] = editPizza;
-			
-					}
-		
+				try{
+					outilAccessData.updatePizza(codePizza, editPizza);
+				}catch(UpdatePizzaException modifierPizzaExceptionCestPasBien) {
+					
+					System.err.println(modifierPizzaExceptionCestPasBien.getMessage());
 				}
 	
 	
 			} else if(option == 4) {		
 	
 				System.out.println(" Supprimer une pizza" + "\ncode de la pizza : ");
-				//remise a 0 
+				//reboot à zéro
 				sc.nextLine();
 	
 				String codeToDelete = sc.nextLine();
-		
-				// création d'un tableau temporaire plus petit que l'ancien
-				Pizza [] pizzasProvisoire2 = new Pizza[pizzas.length-1];
-		
-				// utilisation d'une variable i pour lajout des pizza a garder dans le tableau
-				int i = 0;
-				for (Pizza deletePizza : pizzas) {
-					// si le code de la pizza n'est pas celui a supprimer on le rajoute au tableau
-					if(!deletePizza.getCode().equals(codeToDelete)) {
-						pizzasProvisoire2[i] = deletePizza;
-						i++;
-					}
+				
+				try {
+					outilAccessData.deletePizza(codeToDelete);
+				} catch (DeletePizzaException SupprimerPizzaExceptionCestPasBien) {
+				 System.err.println(SupprimerPizzaExceptionCestPasBien.getMessage());
 				}
 		
-				// modification de la taille de l'ancien tableau et copie des données
-				pizzas = new Pizza[pizzasProvisoire2.length];
-				pizzas = pizzasProvisoire2;
+				
 
+			} if(option == 5) {
+				IncreasingCode increasingCode = new IncreasingCode();
+				
+				Collections.sort(pizzas, increasingCode);
+				System.out.println("Tri du code par ordre croissant");
+				outilAccessData.listPizza();
+			} else if(option == 6) {
+				DecreasingPrice decreasingPrice = new DecreasingPrice();
+				
+				Collections.sort(pizzas, decreasingPrice);
+				System.out.println("trié par prix décroissant \r\n");
+				outilAccessData.listPizza();
+			
 			} else if(option == 99) {
 			
 				System.out.println("Get out of here ! ");

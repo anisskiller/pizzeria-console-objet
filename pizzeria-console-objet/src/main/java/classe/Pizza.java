@@ -1,5 +1,9 @@
 package classe;
 
+import com.pizzeria.model.CategoriePizzaEnum;
+
+import exception.StockageException;
+
 public class Pizza {
 
 	public int id;
@@ -8,6 +12,12 @@ public class Pizza {
 	public double prix;
 	
 	private static  int count = 0;
+	private CategoriePizzaEnum CategoriePizza;
+	
+	 
+	 private final int GRAND_PRIX = 20;
+	 private final int PETIT_PRIX = 1;
+	 private final int LONGUEUR_CODE = 4;
 	
 	/**
 	 * @param id : identifiant de la pizza
@@ -22,7 +32,7 @@ public class Pizza {
 
 	
 	public String toString() {
-		return code + " -> " + designation + "("+ prix + "€)";
+		return code + " -> " + designation + "("+ prix + "€) | Catégorie : " + CategoriePizza;
 	}
 
 	public Pizza() {
@@ -85,13 +95,46 @@ public class Pizza {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
+	
+	public CategoriePizzaEnum getCategoriePizza() {
+		return CategoriePizza;
+	}
+
+	public void setCategoriePizza(CategoriePizzaEnum categoriePizza) {
+		CategoriePizza = categoriePizza;
+	}
 
 
-	public Pizza(String code, String designation, double prix) {
+	public Pizza(String code, String designation, double prix, CategoriePizzaEnum CategoriePizza) {
 		this.id = count++;
 		this.code = code;
 		this.designation = designation;
-		this.prix = prix;			
+		this.prix = prix;
+		this.CategoriePizza = CategoriePizza; 
 	}
+	
+	
+	public void controleDeDonnees() throws StockageException{
+		
+		String info = "";
+		
+		if(this.id<0) {
+			info += " ID ne peut pas être inférieur à zéro. \r\n";
+		}
+		
+		if(this.code.trim().length()> LONGUEUR_CODE) {
+			info += " Le code ne dépasse pas " + LONGUEUR_CODE + " caractères \n";
+		}
+		if(this.prix < PETIT_PRIX || this.prix > GRAND_PRIX) {
+			info +=  " Le prix ne peut pas être en dehors de " + PETIT_PRIX + " et " + GRAND_PRIX + "\n";
+		}
+		
+		if(!info.isEmpty() ||  info.trim().length() > 0) {
+			System.out.println("validé par le contrôle de données");
+			throw new StockageException(info);
+		}
+	}
+
+	
 	
 }

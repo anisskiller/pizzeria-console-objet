@@ -5,11 +5,13 @@ import java.util.Comparator;
 public class IncreasingCode implements Comparator<Pizza> {
 
 
-	
-	public int compare(Pizza o1, Pizza o2) {
-		// TODO Auto-generated method stub
-		int comparisonCodePizza = o1.getCode().compareTo(o2.getCode());
+	public int compare(Pizza p1, Pizza p2) {
+
+		int comparisonCodePizza = 0;
+		comparisonCodePizza = p1.getCode().compareTo(p2.getCode());
 		return comparisonCodePizza;
 	}
+	
+	
 
 }

@@ -7,8 +7,16 @@ public class DecreasingPrice implements Comparator<Pizza> {
 	public int compare(Pizza pizza1, Pizza pizza2) {
 		// TODO Auto-generated method stub
 		
-		int comparisonPricePizza = Double.compare(pizza2.getPrix(), pizza1.getPrix()); 
-		return comparisonPricePizza;
+		
+		int ComparisonPricePizza = 0;
+		if(pizza1.getPrix()>pizza2.getPrix()) {
+			ComparisonPricePizza = 1;
+		}else {
+			ComparisonPricePizza = -1;
+		}
+		return ComparisonPricePizza;
+		
+		
 	}
 
 
