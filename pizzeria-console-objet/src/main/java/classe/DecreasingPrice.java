@@ -9,7 +9,7 @@ public class DecreasingPrice implements Comparator<Pizza> {
 		
 		
 		int ComparisonPricePizza = 0;
-		if(pizza1.getPrix()>pizza2.getPrix()) {
+		if(pizza1.getPrix()<pizza2.getPrix()) {
 			ComparisonPricePizza = 1;
 		}else {
 			ComparisonPricePizza = -1;

@@ -1,6 +1,7 @@
 package classe;
 
-import com.pizzeria.model.CategoriePizzaEnum;
+
+
 
 import exception.StockageException;
 
@@ -12,7 +13,7 @@ public class Pizza {
 	public double prix;
 	
 	private static  int count = 0;
-	private CategoriePizzaEnum CategoriePizza;
+	private CategoriePizzaEnum TypePizza;
 	
 	 
 	 private final int GRAND_PRIX = 20;
@@ -96,21 +97,21 @@ public class Pizza {
 		this.prix = prix;
 	}
 	
-	public CategoriePizzaEnum getCategoriePizza() {
-		return CategoriePizza;
+	public CategoriePizzaEnum getTypePizza() {
+		return TypePizza;
 	}
 
-	public void setCategoriePizza(CategoriePizzaEnum categoriePizza) {
-		CategoriePizza = categoriePizza;
+	public void setTypePizza(Pizza typePizza) {
+		TypePizza = typePizza;
 	}
 
 
-	public Pizza(String code, String designation, double prix, CategoriePizzaEnum CategoriePizza) {
+	public Pizza(String code, String designation, double prix, CategoriePizzaEnum TypePizza) {
 		this.id = count++;
 		this.code = code;
 		this.designation = designation;
 		this.prix = prix;
-		this.CategoriePizza = CategoriePizza; 
+		this.TypePizza = TypePizza; 
 	}
 	
 	
@@ -118,11 +119,11 @@ public class Pizza {
 		
 		String info = "";
 		
-		if(this.id<0) {
+		if(this.id < 0) {
 			info += " ID ne peut pas être inférieur à zéro. \r\n";
 		}
 		
-		if(this.code.trim().length()> LONGUEUR_CODE) {
+		if(this.code.trim().length() > LONGUEUR_CODE) {
 			info += " Le code ne dépasse pas " + LONGUEUR_CODE + " caractères \n";
 		}
 		if(this.prix < PETIT_PRIX || this.prix > GRAND_PRIX) {
